@@ -14,8 +14,18 @@ public class Visitor extends Base {
 	private Long rid;
 	/**探访者ID*/
 	private Long uid;
+	/*探访者名字*/
+	private String uname;
 
 	public Visitor(){
+	}
+
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 
 	public void setRid(Long value) {

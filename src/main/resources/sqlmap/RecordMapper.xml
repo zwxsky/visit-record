@@ -5,17 +5,33 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="commonColumns">
 	    <![CDATA[
-        	id as id ,
-        	title as title ,
-        	uid as uid ,
-        	gmt_deadline as gmtDeadline ,
-        	gmt_visit as gmtVisit ,
-        	reason as reason ,
-        	logs as logs ,
-        	status as status ,
-        	gmt_create as gmtCreate ,
-        	gmt_modify as gmtModify 
+            record.id as id ,
+            record.title as title ,
+            record.uid as uid ,
+            record.gmt_visit as gmtVisit ,
+            record.reason as reason ,
+            record.logs as logs ,
+            record.status as status ,
+            record.gmt_create as gmtCreate ,
+            record.gmt_modify as gmtModify 
 	    ]]>
+	</sql>
+	<sql id="user_cloumn">
+		user.addr ,
+		user.name
+	</sql>
+	<sql id="record_cond">
+		<where>
+			<if test="cond.status !=null">
+				and status =#{cond.status}
+			</if>
+			<if test="cond.status !=null">
+				and status =#{cond.status}
+			</if>
+			<if test="cond.status !=null">
+				and status =#{cond.status}
+			</if>
+		</where>
 	</sql>
     
 	<!-- 新增记录 -->
@@ -25,7 +41,6 @@
         	id ,
         	title ,
         	uid ,
-        	gmt_deadline ,
         	gmt_visit ,
         	reason ,
         	logs ,
@@ -36,7 +51,6 @@
         	#{id} ,
         	#{title} ,
         	#{uid} ,
-        	#{gmtDeadline} ,
         	#{gmtVisit} ,
         	#{reason} ,
         	#{logs} ,
@@ -59,9 +73,6 @@
 			</if>
 	        <if test="uid != null">
 				uid = #{uid},
-			</if>
-	        <if test="gmtDeadline != null">
-				gmt_deadline = #{gmtDeadline},
 			</if>
 	        <if test="gmtVisit != null">
 				gmt_visit = #{gmtVisit},
@@ -94,5 +105,39 @@
 		        id = #{id} 
 	    ]]>
     </select>
+    
+    <select id="queryByCond" parameterType="com.church.visit.model.RecordCond" resultType="com.church.visit.model.RecordModel">
+    	select <include refid="commonColumns"/>
+    	from record
+    	<if test="cond.uid!=null">
+    		inner join visitor on visitor.rid = record.id
+    		where visitor.uid=#{cond.uid}	and status =#{cond.status}
+    	</if>
+    	<if test="cond.uid ==null">
+    		where status =#{cond.status}
+    	</if>
+    </select>
+    
+    <update id="updateModel" parameterType="com.church.visit.model.RecordModel" >
+    		update record
+    		<set>
+    			 <if test="gmtVisit != null">
+					gmt_visit = #{gmtVisit},
+				</if>
+    			 <if test="reason != null">
+					reason = #{reason}
+				</if>
+    		</set>
+    </update>
+    
+    <select id="queryModel" parameterType="java.lang.Long" resultType="com.church.visit.model.RecordModel">
+    	select 
+    	<include refid="commonColumns"/>, user.addr as addr, user.name as name
+	     from record 
+	     inner join user on user.id = record.uid
+	     where  record.id = #{id} 
+    </select>
+    
+    
 
 </mapper>

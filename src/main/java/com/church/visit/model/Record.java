@@ -12,6 +12,11 @@ public class Record extends Base {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public static final int STATUS_UNACCEPT =0;  //未接受
+    public static final int STATUS_ACCEPTED =1;  //进行中 有3个人及以上
+    public static final int STATUS_FINISHED =2;   //已完成
+    public static final int STATUS_DELETE =3;     //已取消
+	
 	/**记录名*/
 	private String title;
 	/**被探访者ID*/

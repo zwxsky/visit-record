@@ -76,3 +76,9 @@ CREATE TABLE `agenda` (
   `gmt_modify` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `visit-record`.`visitor` 
+ADD COLUMN `uname` VARCHAR(45) NULL AFTER `uid`;
+ALTER TABLE `visit-record`.`record` 
+DROP COLUMN `gmt_deadline`;

@@ -5,16 +5,16 @@
 	<!-- 用于select查询公用抽取的列 -->
 	<sql id="commonColumns">
 	    <![CDATA[
-        	id as id ,
-        	name as name ,
-        	phone as phone ,
-        	pwd as pwd ,
-        	age as age ,
-        	addr as addr ,
-        	type as type ,
-        	is_disable as isDisable ,
-        	gmt_create as gmtCreate ,
-        	gmt_modify as gmtModify 
+            user.id as id ,
+            user.name as name ,
+            user.phone as phone ,
+            user.pwd as pwd ,
+            user.age as age ,
+            user.addr as addr ,
+            user.type as type ,
+            user.is_disable as isDisable ,
+            user.gmt_create as gmtCreate ,
+            user.gmt_modify as gmtModify 
 	    ]]>
 	</sql>
     
@@ -93,6 +93,11 @@
 	    <![CDATA[ from user where 
 		        id = #{id} 
 	    ]]>
+    </select>
+    <select id="queryByName" parameterType="java.lang.String" resultType="com.church.visit.model.User">
+    	select <include refid="commonColumns"/>
+    	from user
+    	where name=#{name}
     </select>
 
 </mapper>
