@@ -25,11 +25,11 @@
 			<if test="cond.status !=null">
 				and status =#{cond.status}
 			</if>
-			<if test="cond.status !=null">
-				and status =#{cond.status}
+			<if test="cond.fromTime!=null">
+				and gmt_visit &gt; #{cond.fromTime}
 			</if>
-			<if test="cond.status !=null">
-				and status =#{cond.status}
+			<if test="cond.toTime !=null">
+				and gmt_visit &lt; #{cond.toTime}
 			</if>
 		</where>
 	</sql>
@@ -114,7 +114,7 @@
     		where visitor.uid=#{cond.uid}	and status =#{cond.status}
     	</if>
     	<if test="cond.uid ==null">
-    		where status =#{cond.status}
+    	<include refid="record_cond"/>
     	</if>
     </select>
     

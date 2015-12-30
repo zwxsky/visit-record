@@ -32,9 +32,9 @@ public class RecordController extends BaseController {
 	 * @param cond
 	 * @return
 	 */
-	@RequestMapping(value="/cond",method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
-	public List<RecordModel> postByCond(HttpServletRequest request,HttpServletResponse response,
+	public List<RecordModel> getList(HttpServletRequest request,HttpServletResponse response,
 			RecordCond cond){
 		return recordService.queryByCond(cond);
 	}

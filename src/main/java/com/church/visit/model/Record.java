@@ -2,9 +2,15 @@ package com.church.visit.model;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+
 /**
  * Record
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonSerialize(include=Inclusion.NON_NULL)
 public class Record extends Base {
 		
 	/**
@@ -22,7 +28,7 @@ public class Record extends Base {
 	/**被探访者ID*/
 	private Long uid;
 	/**截止时间*/
-	private Date gmtDeadline;
+//	private Date gmtDeadline;
 	/**探访时间*/
 	private Date gmtVisit;
 	/**缘由记录*/
@@ -50,13 +56,13 @@ public class Record extends Base {
 		return this.uid;
 	}
 	
-	public void setGmtDeadline(Date value) {
+	/*public void setGmtDeadline(Date value) {
 		this.gmtDeadline = value;
 	}
 	
 	public Date getGmtDeadline() {
 		return this.gmtDeadline;
-	}
+	}*/
 	
 	public void setGmtVisit(Date value) {
 		this.gmtVisit = value;

@@ -17,6 +17,13 @@
             user.gmt_modify as gmtModify 
 	    ]]>
 	</sql>
+	<sql id ="user_cond">
+		<where>
+			<if test="cond.type !=null">
+				type=#{cond.type}
+			</if>
+		</where>
+	</sql>
     
 	<!-- 新增记录 -->
 	<insert id="insert" parameterType="com.church.visit.model.User" useGeneratedKeys="true" keyProperty="id" >
@@ -98,6 +105,13 @@
     	select <include refid="commonColumns"/>
     	from user
     	where name=#{name}
+    </select>
+    
+    <select id="getList" resultType="com.church.visit.model.User">
+    	select 
+    	<include refid="commonColumns"/>
+    	from user
+    	<include refid="user_cond"/>
     </select>
 
 </mapper>

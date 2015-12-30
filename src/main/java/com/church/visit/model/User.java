@@ -1,8 +1,14 @@
 package com.church.visit.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+
 /**
  * User
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonSerialize(include=Inclusion.NON_NULL)
 public class User extends Base {
 		
 	/**
